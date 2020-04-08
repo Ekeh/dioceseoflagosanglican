@@ -11,7 +11,6 @@ import 'package:anglican_lagos/common/request_tracker_model.dart';
 import 'package:anglican_lagos/models/user_model.dart';
 import 'package:anglican_lagos/modules/base_stateful_guest.dart';
 import 'package:anglican_lagos/modules/home_page.dart';
-import 'package:anglican_lagos/services/video_player_service.dart';
 
 
 class AppDrawerUser extends StatefulWidget {
@@ -25,7 +24,7 @@ class _AppDrawerUserState extends BaseStatefulGuest<AppDrawerUser> with SingleTi
   ///Custom class for notifications
   ShowCustomDialogs showCustomDialogs = new ShowCustomDialogs();
   UserModel _user;
-  var videoPlayerService = new VideoPlayerService();
+ // var videoPlayerService = new VideoPlayerService();
   @override
   void initState() {
     _animationController = new AnimationController(
@@ -38,7 +37,7 @@ class _AppDrawerUserState extends BaseStatefulGuest<AppDrawerUser> with SingleTi
   Future<void> _refreshProfile() async{
     _animationController.repeat();
 
-    videoPlayerService.refreshLoginUserInformation().then((RequestProgressTrackerModel<bool> request) async{
+   /* videoPlayerService.refreshLoginUserInformation().then((RequestProgressTrackerModel<bool> request) async{
       if(request.status == RequestStatus.COMPLETED){
         _userStreamController.add(await userManagerService.getUser());
         _animationController.reset();
@@ -47,7 +46,7 @@ class _AppDrawerUserState extends BaseStatefulGuest<AppDrawerUser> with SingleTi
         _getUser();
         showCustomDialogs.showFlushbar(icon: Icons.error, context: context, message:request.message);
       }
-    });
+    });*/
 
   }
 

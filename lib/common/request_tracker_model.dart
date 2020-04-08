@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum RequestStatus {
   LOADING, ERROR, COMPLETED, SUCCESS
 }

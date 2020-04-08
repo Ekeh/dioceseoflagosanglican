@@ -20,15 +20,6 @@ class FindChurchPage extends StatefulWidget {
 class _FindChurchPageState extends BaseStatefulGuest<FindChurchPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
   final archdeaconries = <ArchdeaconryModel>[
    new ArchdeaconryModel(
      name: "Apapa",
@@ -183,7 +174,6 @@ new ArchdeaconryModel(
         key: _scaffoldKey,
         appBar: AppBar(
             elevation: 0.0,
-            backgroundColor: Colors.transparent,
             title: Text('Churches')),
         body: SingleChildScrollView(
           child: Container(

@@ -46,31 +46,7 @@ class UtilityService {
    }
    return '';
  }
- static Map<String, String> getFormattedPlayingTime(int totalDurationInSeconds, int positionInSeconds) {
-   var durationHours =  (totalDurationInSeconds / 3600).floor();
-   var durationMinutes = ((totalDurationInSeconds / 60) % 60).floor();
-   var durationSeconds = totalDurationInSeconds % 60;
-   var duration = '';
-   duration += durationHours > 0 ? durationHours.toString().length == 1 ? '0${durationHours.toString()}:' : '${durationHours.toString()}:' : '';
-   duration += durationMinutes > 0 ? durationMinutes.toString().length == 1 ? '0${durationMinutes.toString()}:' : '${durationMinutes.toString()}:' : '00:';
-   duration += durationSeconds > 0 ? durationSeconds.toString().length == 1 ? '0${durationSeconds.toString()}' : '${durationSeconds.toString()}' : '00';
 
-   ///Position
-   var positionHours =  (positionInSeconds / 3600).floor();
-   var positionMinutes = ((positionInSeconds / 60) % 60).floor();
-   var positionSeconds = positionInSeconds % 60;
-   var position = '';
-   position += positionHours > 0 ? positionHours.toString().length == 1 ? '0${positionHours.toString()}:' : '${positionHours.toString()}:' : '';
-   position += positionMinutes > 0 ? positionMinutes.toString().length == 1 ? '0${positionMinutes.toString()}:' : '${positionMinutes.toString()}:' : '00:';
-   position += positionSeconds > 0 ? positionSeconds.toString().length == 1 ? '0${positionSeconds.toString()}' : '${positionSeconds.toString()}' : '00';
-   Map<String, String> items ={};
-   if(positionInSeconds > totalDurationInSeconds){
-     items.addAll({'duration':duration,'position':duration});
-   }else{
-     items.addAll({'duration':duration,'position':position});
-   }
-   return items;
- }
  static String padLeft(BigInt number, {String padWith = '0', int padSize = 6}) {
    return number.toString().padLeft(padSize, padWith);
  }

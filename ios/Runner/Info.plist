@@ -46,5 +46,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<key>NSCalendarsUsageDescription</key>
+    <string>Allow app to use your calendar</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Allow app to use your contacts</string>
 </dict>
 </plist>

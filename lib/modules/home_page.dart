@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:anglican_lagos/common/check_internet_connection.dart';
 import 'package:anglican_lagos/models/resources_model.dart';
+import 'package:anglican_lagos/modules/upcoming_events_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,9 +39,8 @@ class MenuData{
    final MenuType menuType;
    final String url;
    final VoidCallback onClick;
-   final MaterialPageRoute route;
 
-   MenuData(this.icon, this.name, this.color, this.menuType, {this.url, this.onClick, this.route});
+   MenuData(this.icon, this.name, this.color, this.menuType, {this.url, this.onClick});
 
 }
 class SliderData{
@@ -84,8 +84,7 @@ class _HomePageState extends BaseStatefulAuthorized<HomePage>
 var _menuData =  <MenuData>[
   new MenuData(FontAwesomeIcons.infoCircle, AppConsts.MENU_ABOUT_THE_CHURCH, Colors.green[900], MenuType.LINK,
       url: AppConsts.MENU_ABOUT_THE_CHURCH_URL),
-  new MenuData(FontAwesomeIcons.map, AppConsts.MENU_FIND_CHURCH, Colors.brown, MenuType.NAVIGATE,
-  route: new MaterialPageRoute(builder: (BuildContext context) =>  new FindChurchPage())),
+  new MenuData(FontAwesomeIcons.map, AppConsts.MENU_FIND_CHURCH, Colors.brown, MenuType.NAVIGATE),
   new MenuData(FontAwesomeIcons.users, AppConsts.MENU_DIRECTORATES,
       Colors.blue, MenuType.LINK, url: AppConsts.MENU_DIRECTORATES_URL),
   new MenuData(FontAwesomeIcons.users, AppConsts.MENU_ARCH_DEACONRIES,
@@ -94,11 +93,11 @@ var _menuData =  <MenuData>[
       url: AppConsts.MENU_DONATIONS_URL),
   new MenuData(FontAwesomeIcons.tv, AppConsts.MENU_LAGOON_RADIO_TV, Colors.green, MenuType.LINK,
       url: AppConsts.MENU_LAGOON_RADIO_TV_URL),
-  new MenuData(FontAwesomeIcons.users, AppConsts.MENU_SOCIAL_MEDIA, Colors.black, MenuType.PAGE),
+  /*new MenuData(FontAwesomeIcons.users, AppConsts.MENU_SOCIAL_MEDIA, Colors.black, MenuType.PAGE),*/
   new MenuData(FontAwesomeIcons.bookmark, AppConsts.MENU_CENTENARY_CITY, Colors.yellow[900], MenuType.LINK,
       url: AppConsts.MENU_CENTENARY_CITY_URL),
 
-  new MenuData(FontAwesomeIcons.calendar, AppConsts.MENU_UPCOMING_PROGRAMS, Colors.brown[900], MenuType.PAGE),
+  new MenuData(FontAwesomeIcons.calendar, AppConsts.MENU_UPCOMING_PROGRAMS, Colors.brown[900], MenuType.NAVIGATE),
  /* new MenuData(FontAwesomeIcons.users, AppConsts.MENU_CENTENARY_CELEBRATIONS, Colors.red[900], MenuType.LINK,
       url: AppConsts.MENU_CENTENARY_CELEBRATIONS_URL),*/
   new MenuData(FontAwesomeIcons.personBooth, AppConsts.MENU_WOMEN_GIRLS_ORGANIZATION, Colors.black, MenuType.PAGE),
@@ -241,8 +240,13 @@ var _sliders =  <SliderData>[
                              _menuData[index].name == AppConsts.MENU_RESOURCES){
                            _modalBottomSheetMenu();
                          }else if(_menuData[index].menuType == MenuType.NAVIGATE){
-                           if(_menuData[index].route != null)
-                           Navigator.of(context).push(_menuData[index].route);
+                           if( _menuData[index].name == AppConsts.MENU_FIND_CHURCH){
+                             Navigator.of(context).push(new MaterialPageRoute(builder: (
+                                 BuildContext context) => new FindChurchPage()));
+                           }else if(_menuData[index].name == AppConsts.MENU_UPCOMING_PROGRAMS){
+                             Navigator.of(context).push(new MaterialPageRoute(builder: (
+                                 BuildContext context) => new UpcomingEventsPage()));
+                           }
                          }else{
                            showCustomDialogs.showFlushbar(
                                context: context, message: 'Coming soon...');
