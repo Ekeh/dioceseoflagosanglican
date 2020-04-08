@@ -1,0 +1,8 @@
+enum SavedDataType{
+  STATES,
+CITIES,
+BANKS,
+CAR_MAKE,
+CAR_MODELS,
+BANK_DETAILS
+}
