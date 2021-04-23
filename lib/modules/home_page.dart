@@ -13,9 +13,11 @@ import 'package:anglican_lagos/models/user_model.dart';
 import 'package:anglican_lagos/uilayouts/app_drawer_user.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'base_stateful_authorized.dart';
 import 'find_church.dart';
+import 'find_church_map.dart';
 import 'my_webview.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -60,12 +62,32 @@ class _HomePageState extends BaseStatefulAuthorized<HomePage>
    @override
   void initState() {
     super.initState();
+    _requestPermissions();
     _getUser();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
 
+  }
+
+  _requestPermissions() async{
+    var permissionNames = <String>[];
+    Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.location]);
+   PermissionStatus locationStatus = permissions[PermissionGroup.location];
+   if(locationStatus != PermissionStatus.granted){
+     permissionNames.add('Location');
+   }
+
+   if(permissionNames.length > 0){
+     var msg = '';
+     permissionNames.forEach((name) => msg += name + '\n');
+     ShowCustomDialogs.showAlertWithMultipleActions(context: context, content: 'The permissions listed below are required for this app to function properly. '
+         'Please goto the app settings in your phone and accept the permissions.\n' +
+         msg, actions: <FlatButton>[
+
+     ]);
+   }
   }
 
   @override
@@ -236,18 +258,18 @@ var _sliders =  <SliderData>[
                           showCustomDialogs.showFlushbar(
                               context: context, message: 'Please, connect to the internet and try again.');
                           }
-                         }else if(_menuData[index].menuType == MenuType.ACTION &&
+                         } else if (_menuData[index].menuType == MenuType.ACTION &&
                              _menuData[index].name == AppConsts.MENU_RESOURCES){
                            _modalBottomSheetMenu();
-                         }else if(_menuData[index].menuType == MenuType.NAVIGATE){
+                         } else if (_menuData[index].menuType == MenuType.NAVIGATE){
                            if( _menuData[index].name == AppConsts.MENU_FIND_CHURCH){
                              Navigator.of(context).push(new MaterialPageRoute(builder: (
-                                 BuildContext context) => new FindChurchPage()));
-                           }else if(_menuData[index].name == AppConsts.MENU_UPCOMING_PROGRAMS){
+                                 BuildContext context) => new FindChurchMapPage()));
+                           }/*else if(_menuData[index].name == AppConsts.MENU_UPCOMING_PROGRAMS){
                              Navigator.of(context).push(new MaterialPageRoute(builder: (
                                  BuildContext context) => new UpcomingEventsPage()));
-                           }
-                         }else{
+                           }*/
+                         } else {
                            showCustomDialogs.showFlushbar(
                                context: context, message: 'Coming soon...');
                          }

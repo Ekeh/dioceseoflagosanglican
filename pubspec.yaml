@@ -28,7 +28,7 @@ dependencies:
   sqflite: 1.1.0
   connectivity: ^0.4.5+3
   font_awesome_flutter: ^8.0.1
-  flushbar: 1.9.0
+  flushbar: ^1.10.4
   url_launcher: ^5.2.5
   http: ^0.12.0+2
   intl: ^0.15.6
@@ -39,7 +39,7 @@ dependencies:
   google_maps_flutter: 0.5.21
   add_2_calendar: ^1.4.0
   #flutter_webview_plugin: ^0.3.8
-
+  geolocator: 2.0.0
 
 
 

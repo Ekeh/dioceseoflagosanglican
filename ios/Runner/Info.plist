@@ -51,5 +51,14 @@
     <string>Allow app to use your calendar</string>
     <key>NSContactsUsageDescription</key>
     <string>Allow app to use your contacts</string>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open and in the background.</string>
+
 </dict>
 </plist>
