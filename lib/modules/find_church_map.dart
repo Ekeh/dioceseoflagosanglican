@@ -133,7 +133,7 @@ class _FindChurchMapPageState extends BaseStatefulGuest<FindChurchMapPage>{
   }
 
   void _getCurrentLocation() async{
-    currentPosition = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    currentPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     if(currentPosition != null) {
       currentLocation = new LatLng(currentPosition.latitude, currentPosition.longitude);
       churchesAroundLocation = churches.where((church) => church.latitude <= currentLocation.latitude &&

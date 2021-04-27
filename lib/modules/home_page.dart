@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:anglican_lagos/common/check_internet_connection.dart';
 import 'package:anglican_lagos/models/resources_model.dart';
-import 'package:anglican_lagos/modules/upcoming_events_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'base_stateful_authorized.dart';
-import 'find_church.dart';
 import 'find_church_map.dart';
 import 'my_webview.dart';
 class HomePage extends StatefulWidget {
@@ -73,9 +71,11 @@ class _HomePageState extends BaseStatefulAuthorized<HomePage>
 
   _requestPermissions() async{
     var permissionNames = <String>[];
-    Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.location]);
-   PermissionStatus locationStatus = permissions[PermissionGroup.location];
-   if(locationStatus != PermissionStatus.granted){
+    //Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.location]);
+   Map<Permission, PermissionStatus> statuses = await [
+  Permission.location,
+].request();
+   if(statuses[Permission.location] != PermissionStatus.granted){
      permissionNames.add('Location');
    }
 
